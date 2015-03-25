@@ -38,8 +38,10 @@ for line in lines :
 	elif inst == 'switch' :
 		out_task, in_task, tick, tick_reload, out_minitick, in_minitick = args.split(' ')
 		
-		out_time = (int(tick) + (int(tick_reload) - int(out_minitick)) / int(tick_reload)) / 100 * 1000;
-		in_time  = (int(tick) + (int(tick_reload) - int(in_minitick))  / int(tick_reload)) / 100 * 1000;
+	#	out_time = (int(tick) + (int(tick_reload) - int(out_minitick)) / int(tick_reload)) / 100 * 1000;
+	#	in_time  = (int(tick) + (int(tick_reload) - int(in_minitick))  / int(tick_reload)) / 100 * 1000;
+		out_time = (int(tick) + (int(tick_reload) - int(out_minitick)) / int(tick_reload)) * 10;
+		in_time  = (int(tick) + (int(tick_reload) - int(in_minitick))  / int(tick_reload)) * 10;
 		
 		event = {}
 		event['type'] = 'task out'

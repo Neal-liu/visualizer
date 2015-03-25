@@ -201,6 +201,13 @@ void serial_readwrite_task(void *pvParameters)
 	}
 }
 
+void task1Func(void *pvParameters){
+	while(1);
+}
+void task2Func(void *pvParameters){
+	while(1);
+}
+
 int main()
 {
 	logfile = open("log", 4);
@@ -248,11 +255,25 @@ int main()
 	            512 /* stack size */, NULL,
 	            tskIDLE_PRIORITY + 10, NULL);
 
+
+	xTaskCreate(task1Func,
+	            (signed portCHAR *) "Task1",
+	            128 /* stack size */, NULL,
+	            tskIDLE_PRIORITY + 1, NULL);
+
+	xTaskCreate(task2Func,
+	            (signed portCHAR *) "Task2",
+	            128 /* stack size */, NULL,
+	            tskIDLE_PRIORITY + 1, NULL);
+	
+
+
 	/* Start running the tasks. */
 	vTaskStartScheduler();
 
 	return 0;
 }
+
 
 void vApplicationTickHook()
 {
@@ -307,7 +328,7 @@ unsigned int get_time()
 {
 	static unsigned int const *reload = (void *) 0xE000E014;
 	static unsigned int const *current = (void *) 0xE000E018;
-	static const unsigned int scale = 1000000 / configTICK_RATE_HZ;
+	static const unsigned int scale = 1000000 / configTICK_RATE_HZ;	//configTICK_RATE_HZ = 100
 					/* microsecond */
 
 	return xTaskGetTickCount() * scale +
