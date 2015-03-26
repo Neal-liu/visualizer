@@ -22,14 +22,9 @@ for line in lines :
         information['out'] = out_task
         information['in'] = in_task
         information['duration'] = in_time - out_time
-        costTime.write('switch from %s to %s costs %f seconds\n' % (information['out'], information['in'], information['duration']) )
- #       context_switch.append(information)
+        costTime.write('switch from %s to %s costs %f milliseconds\n' % (information['out'], information['in'], information['duration']) )
 
 log.close()
-
-#for information in context_switch : 
-#    costTime.write('switch from %s to %s costs %f seconds\n' % (information['out'], information['in'], information['duration']) )
-
 costTime.close()
 
 
